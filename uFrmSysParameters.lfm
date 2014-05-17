@@ -1,0 +1,299 @@
+object frmSysParameters: TfrmSysParameters
+  Left = 0
+  Height = 557
+  Top = 0
+  Width = 677
+  ClientHeight = 557
+  ClientWidth = 677
+  TabOrder = 0
+  DesignLeft = 279
+  DesignTop = 185
+  object btnSaveChanges: TBitBtn
+    Left = 224
+    Height = 30
+    Top = 8
+    Width = 208
+    Caption = 'Save'
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = btnSaveChangesClick
+    TabOrder = 0
+  end
+  object btnReload: TBitBtn
+    Left = 8
+    Height = 30
+    Top = 8
+    Width = 208
+    Caption = 'Reload'
+    Kind = bkRetry
+    OnClick = btnReloadClick
+    TabOrder = 1
+  end
+  object pcSPI: TPageControl
+    Left = 8
+    Height = 504
+    Top = 48
+    Width = 664
+    ActivePage = stClearType
+    TabIndex = 1
+    TabOrder = 2
+    object tsNonClientArea: TTabSheet
+      Caption = 'Non-Client'
+      ClientHeight = 471
+      ClientWidth = 656
+      object seBorderWidth: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 16
+        Width = 208
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        Left = 8
+        Height = 20
+        Top = 19
+        Width = 151
+        Caption = 'Window Border Width:'
+        ParentColor = False
+      end
+      object seScrollBarWidth: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 51
+        Width = 88
+        TabOrder = 1
+      end
+      object Label2: TLabel
+        Left = 8
+        Height = 20
+        Top = 54
+        Width = 97
+        Caption = 'Scroll Bar Size:'
+        ParentColor = False
+      end
+      object seScrollBarHeight: TSpinEdit
+        Left = 344
+        Height = 28
+        Top = 51
+        Width = 88
+        TabOrder = 2
+      end
+      object seCaptionWidth: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 88
+        Width = 88
+        TabOrder = 3
+      end
+      object Label4: TLabel
+        Left = 8
+        Height = 20
+        Top = 91
+        Width = 86
+        Caption = 'Caption Size:'
+        ParentColor = False
+      end
+      object seCaptionHeight: TSpinEdit
+        Left = 344
+        Height = 28
+        Top = 88
+        Width = 88
+        TabOrder = 4
+      end
+      object seMenuWidth: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 160
+        Width = 88
+        TabOrder = 5
+      end
+      object Label6: TLabel
+        Left = 8
+        Height = 20
+        Top = 163
+        Width = 71
+        Caption = 'Menu Size:'
+        ParentColor = False
+      end
+      object seMenuHeight: TSpinEdit
+        Left = 344
+        Height = 28
+        Top = 160
+        Width = 88
+        TabOrder = 6
+      end
+      object seSmCaptionWidth: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 123
+        Width = 88
+        TabOrder = 7
+      end
+      object Label5: TLabel
+        Left = 8
+        Height = 20
+        Top = 126
+        Width = 127
+        Caption = 'Small Caption Size:'
+        ParentColor = False
+      end
+      object seSmCaptionHeight: TSpinEdit
+        Left = 344
+        Height = 28
+        Top = 123
+        Width = 88
+        TabOrder = 8
+      end
+      object pnFontCaption: TPanel
+        Left = 8
+        Height = 40
+        Top = 192
+        Width = 424
+        Caption = 'Caption font'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 9
+        OnClick = FontClick
+      end
+      object pnFontSmCaption: TPanel
+        Left = 8
+        Height = 40
+        Top = 240
+        Width = 424
+        Caption = 'Small Caption font'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 10
+        OnClick = FontClick
+      end
+      object pnFontMenu: TPanel
+        Left = 8
+        Height = 40
+        Top = 288
+        Width = 424
+        Caption = 'MenuFont'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 11
+        OnClick = FontClick
+      end
+      object pnFontStatus: TPanel
+        Left = 8
+        Height = 40
+        Top = 336
+        Width = 424
+        Caption = 'Status Font'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 12
+        OnClick = FontClick
+      end
+      object pnFontMessage: TPanel
+        Left = 8
+        Height = 40
+        Top = 384
+        Width = 424
+        Caption = 'Dialog Font'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 13
+        OnClick = FontClick
+      end
+      object Label3: TLabel
+        Left = 324
+        Height = 20
+        Top = 54
+        Width = 7
+        Caption = 'x'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 324
+        Height = 20
+        Top = 91
+        Width = 7
+        Caption = 'x'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        Left = 324
+        Height = 20
+        Top = 163
+        Width = 7
+        Caption = 'x'
+        ParentColor = False
+      end
+      object Label9: TLabel
+        Left = 324
+        Height = 20
+        Top = 126
+        Width = 7
+        Caption = 'x'
+        ParentColor = False
+      end
+    end
+    object stClearType: TTabSheet
+      Caption = 'ClearType'
+      ClientHeight = 471
+      ClientWidth = 656
+      object cbFontSmoothing: TCheckBox
+        Left = 24
+        Height = 24
+        Top = 8
+        Width = 126
+        Caption = 'FontSmoothing'
+        TabOrder = 0
+      end
+      object seFontSmoothingContrast: TSpinEdit
+        Left = 184
+        Height = 28
+        Top = 32
+        Width = 221
+        MaxValue = 2200
+        MinValue = 1000
+        TabOrder = 1
+        Value = 1000
+      end
+      object cbFontSmoothingOrientation: TComboBox
+        Left = 184
+        Height = 28
+        Top = 72
+        Width = 456
+        ItemHeight = 20
+        Items.Strings = (
+          'FE_FONTSMOOTHINGORIENTATIONBGR'
+          'FE_FONTSMOOTHINGORIENTATIONRGB'
+        )
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object cbFontSmoothingType: TComboBox
+        Left = 184
+        Height = 28
+        Top = 112
+        Width = 456
+        ItemHeight = 20
+        Items.Strings = (
+          'FE_FONTSMOOTHINGSTANDARD'
+          'FE_FONTSMOOTHINGCLEARTYPE'
+        )
+        Style = csDropDownList
+        TabOrder = 3
+      end
+      object Label10: TLabel
+        Left = 24
+        Height = 20
+        Top = 40
+        Width = 58
+        Caption = 'Contrast:'
+        ParentColor = False
+      end
+    end
+  end
+  object FontDialog1: TFontDialog
+    MinFontSize = 0
+    MaxFontSize = 0
+    left = 473
+    top = 259
+  end
+end

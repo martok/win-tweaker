@@ -1,0 +1,439 @@
+object frmConsole: TfrmConsole
+  Left = 0
+  Height = 636
+  Top = 0
+  Width = 819
+  ClientHeight = 636
+  ClientWidth = 819
+  TabOrder = 0
+  DesignLeft = 987
+  DesignTop = 38
+  object Bevel1: TBevel
+    Left = 0
+    Height = 590
+    Top = 46
+    Width = 40
+    Align = alLeft
+    Shape = bsRightLine
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 46
+    Top = 0
+    Width = 819
+    Align = alTop
+    ClientHeight = 46
+    ClientWidth = 819
+    TabOrder = 0
+    object cbWindowNameSel: TComboBox
+      Left = 200
+      Height = 28
+      Top = 8
+      Width = 480
+      ItemHeight = 20
+      OnChange = cbWindowNameSelChange
+      OnSelect = cbWindowNameSelChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object Label1: TLabel
+      Left = 8
+      Height = 20
+      Top = 12
+      Width = 182
+      Caption = 'Settings for Window Name:'
+      ParentColor = False
+    end
+    object btnDeleteWindowKey: TBitBtn
+      Left = 688
+      Height = 28
+      Top = 8
+      Width = 120
+      Caption = 'Reset'
+      Kind = bkCancel
+      OnClick = btnDeleteWindowKeyClick
+      TabOrder = 1
+    end
+  end
+  object cbCursorSize: TComboBox
+    Left = 240
+    Height = 28
+    Top = 95
+    Width = 192
+    ItemHeight = 20
+    Items.Strings = (
+      '25'
+      '50'
+      '100'
+    )
+    TabOrder = 1
+  end
+  object cbQuickEdit: TCheckBox
+    Left = 240
+    Height = 24
+    Top = 138
+    Width = 87
+    Caption = 'QuickEdit'
+    TabOrder = 2
+  end
+  object cbInsertMode: TCheckBox
+    Left = 240
+    Height = 24
+    Top = 170
+    Width = 103
+    Caption = 'Insert Mode'
+    TabOrder = 3
+  end
+  object GroupBox1: TGroupBox
+    Left = 48
+    Height = 137
+    Top = 210
+    Width = 400
+    Caption = 'Command History'
+    ClientHeight = 115
+    ClientWidth = 396
+    TabOrder = 4
+    object seHistoryLength: TSpinEdit
+      Left = 184
+      Height = 28
+      Top = 4
+      Width = 200
+      MaxValue = 999
+      MinValue = 1
+      TabOrder = 0
+      Value = 1
+    end
+    object seHistoryBufferCount: TSpinEdit
+      Left = 184
+      Height = 28
+      Top = 40
+      Width = 200
+      MaxValue = 999
+      MinValue = 1
+      TabOrder = 1
+      Value = 1
+    end
+    object Label4: TLabel
+      Left = 16
+      Height = 20
+      Top = 44
+      Width = 125
+      Caption = 'Number of Buffers:'
+      ParentColor = False
+    end
+    object cbNoDuplicates: TCheckBox
+      Left = 184
+      Height = 24
+      Top = 80
+      Width = 118
+      Caption = 'No Duplicates'
+      TabOrder = 2
+    end
+    object Label3: TLabel
+      Left = 16
+      Height = 20
+      Top = 8
+      Width = 99
+      Caption = 'History Length:'
+      ParentColor = False
+    end
+  end
+  object Label5: TLabel
+    Left = 48
+    Height = 20
+    Top = 362
+    Width = 89
+    Caption = 'Window Size:'
+    ParentColor = False
+  end
+  object seWinSizeX: TSpinEdit
+    Left = 233
+    Height = 28
+    Top = 357
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    OnChange = seWinSizeChange
+    OnClick = seWinSizeChange
+    TabOrder = 5
+    Value = 1
+  end
+  object seWinSizeY: TSpinEdit
+    Left = 379
+    Height = 28
+    Top = 357
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    OnChange = seWinSizeChange
+    OnClick = seWinSizeChange
+    TabOrder = 6
+    Value = 1
+  end
+  object Label6: TLabel
+    Left = 338
+    Height = 20
+    Top = 362
+    Width = 7
+    Caption = 'x'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 48
+    Height = 20
+    Top = 399
+    Width = 122
+    Caption = 'Screen Buffer Size:'
+    ParentColor = False
+  end
+  object seScrBufSizeX: TSpinEdit
+    Left = 233
+    Height = 28
+    Top = 394
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    OnChange = seScrBufChange
+    TabOrder = 7
+    Value = 1
+  end
+  object seScrBufSizeY: TSpinEdit
+    Left = 379
+    Height = 28
+    Top = 394
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    OnChange = seScrBufChange
+    TabOrder = 8
+    Value = 1
+  end
+  object Label8: TLabel
+    Left = 338
+    Height = 20
+    Top = 399
+    Width = 7
+    Caption = 'x'
+    ParentColor = False
+  end
+  object Label9: TLabel
+    Left = 48
+    Height = 20
+    Top = 438
+    Width = 112
+    Caption = 'Window Position'
+    ParentColor = False
+  end
+  object seWinPosX: TSpinEdit
+    Left = 233
+    Height = 28
+    Top = 433
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    TabOrder = 9
+    Value = 1
+  end
+  object seWinPosY: TSpinEdit
+    Left = 379
+    Height = 28
+    Top = 433
+    Width = 69
+    MaxValue = 999
+    MinValue = 1
+    TabOrder = 10
+    Value = 1
+  end
+  object Label10: TLabel
+    Left = 338
+    Height = 20
+    Top = 438
+    Width = 7
+    Caption = 'x'
+    ParentColor = False
+  end
+  object cbAutomatic: TCheckBox
+    Left = 233
+    Height = 24
+    Top = 466
+    Width = 93
+    Caption = 'Automatic'
+    TabOrder = 11
+  end
+  object Label11: TLabel
+    Left = 436
+    Height = 20
+    Top = 98
+    Width = 12
+    Caption = '%'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 48
+    Height = 20
+    Top = 98
+    Width = 76
+    Caption = 'Cursor Size:'
+    ParentColor = False
+  end
+  object cbStoreCursorSize: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 98
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 12
+  end
+  object cbStoreQuickedit: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 138
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 13
+  end
+  object cbStoreInsertMode: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 171
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 14
+  end
+  object cbStoreHistoryLen: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 234
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 15
+  end
+  object cbStoreHistoryNum: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 274
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 16
+  end
+  object cbStoreHistoryDup: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 306
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 17
+  end
+  object cbStoreWinSize: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 359
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 18
+  end
+  object cbStoreScrBufSize: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 396
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 19
+  end
+  object cbStoreWinPos: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 435
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 20
+  end
+  object cbStoreWinposAuto: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 467
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 21
+  end
+  object cbStoreFont: TCheckBox
+    AnchorSideRight.Control = Label2
+    Left = 10
+    Height = 23
+    Top = 503
+    Width = 24
+    OnClick = cbStoreChecked
+    TabOrder = 22
+  end
+  object cbFontFace: TComboBox
+    Left = 232
+    Height = 28
+    Top = 498
+    Width = 148
+    ItemHeight = 20
+    Items.Strings = (
+      'Terminal'
+      'Consolas'
+      'Lucida Console'
+    )
+    OnSelect = cbFontFaceSelect
+    Style = csDropDownList
+    TabOrder = 23
+  end
+  object Label12: TLabel
+    Left = 48
+    Height = 20
+    Top = 506
+    Width = 29
+    Caption = 'Font'
+    ParentColor = False
+  end
+  object cbFontBold: TCheckBox
+    Left = 393
+    Height = 24
+    Top = 502
+    Width = 55
+    Caption = 'Bold'
+    TabOrder = 24
+  end
+  object cbFontSizeVec: TComboBox
+    Left = 233
+    Height = 28
+    Top = 530
+    Width = 100
+    ItemHeight = 20
+    TabOrder = 25
+    Text = 'cbFontSizeVec'
+  end
+  object cbFontSizeFix: TComboBox
+    Left = 348
+    Height = 28
+    Top = 530
+    Width = 100
+    ItemHeight = 20
+    TabOrder = 26
+    Text = 'cbFontSizeFix'
+  end
+  object btnSaveChanges: TBitBtn
+    Left = 240
+    Height = 30
+    Top = 52
+    Width = 208
+    Caption = 'Save'
+    Default = True
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = btnSaveChangesClick
+    TabOrder = 27
+  end
+end
