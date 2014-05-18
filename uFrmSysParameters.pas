@@ -164,7 +164,7 @@ begin
     GetObject(pnFontStatus.Font.Handle, sizeof(NCM.lfStatusFont), @NCM.lfStatusFont);
     GetObject(pnFontMessage.Font.Handle, sizeof(NCM.lfMessageFont), @NCM.lfMessageFont);
 
-    spi.SetBlob(SPI_GETNONCLIENTMETRICS, ncm.cbSize, @ncm);
+    spi.SetBlob(SPI_SETNONCLIENTMETRICS, ncm.cbSize, @ncm);
     // ClearType
     spi.SetBoolParam(SPI_SETFONTSMOOTHING, cbFontSmoothing.Checked);
     spi.SetUInt(SPI_SETFONTSMOOTHINGCONTRAST, seFontSmoothingContrast.Value);
