@@ -25,6 +25,7 @@ type
     cbFontSmoothingOrientation: TComboBox;
     cbFontSmoothingType: TComboBox;
     cbIconWrapCaption: TCheckBox;
+    cbMouseWheel: TCheckBox;
     FontDialog1: TFontDialog;
     Label1: TLabel;
     Label10: TLabel;
@@ -58,6 +59,7 @@ type
     seSmCaptionWidth: TSpinEdit;
     seFontSmoothingContrast: TSpinEdit;
     stClearType: TTabSheet;
+    tsMouse: TTabSheet;
     tsIcons: TTabSheet;
     tsNonClientArea: TTabSheet;
     procedure btnReloadClick(Sender: TObject);
@@ -83,6 +85,10 @@ const
 
 const
   SPI_GETNONCLIENTMETRICS   = $0029;
+  SPI_GETMOUSEWHEELROUTING  = $201C;
+  SPI_SETMOUSEWHEELROUTING  = $201D;
+  MOUSEWHEEL_ROUTING_FOCUS  = -9999; // Constant unknown...
+  MOUSEWHEEL_ROUTING_HYBRID = -9999; // Constant unknown...
 
 procedure CBAddIntConsts(const CB: TComboBox; const Values: array of UInt; const Names: array of String; const Clear: boolean = false);
 var
@@ -160,6 +166,10 @@ begin
     seIconSpacingY.Value:= icm.iVertSpacing;
     seIconSpacingY.MinValue:= GetSystemMetrics(SM_CYICON);
     pnFontIcons.Font.Handle:= CreateFontIndirect(icm.lfFont);
+
+    // Mouse
+    cbMouseWheel.Checked:= spi.GetUInt(SPI_GETMOUSEWHEELROUTING) in [MOUSEWHEEL_ROUTING_FOCUS, 0];
+
   finally
     FreeAndNil(spi);
   end;
