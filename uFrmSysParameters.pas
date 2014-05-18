@@ -75,9 +75,22 @@ const
   sWindowMetricsRegKey = '\Control Panel\Desktop\WindowMetrics';
 
 const
-  SPI_GETNONCLIENTMETRICS = $0029;
-  CM_WININICHANGE = $b025;
-  CM_SYSFONTCHANGED = $b035;
+  SPI_GETNONCLIENTMETRICS   = $0029;
+
+procedure CBAddIntConsts(const CB: TComboBox; const Values: array of UInt; const Names: array of String; const Clear: boolean = false);
+var
+  i: integer;
+begin
+  if Clear then
+    CB.Clear;
+  for i:= 0 to high(Values) do
+    CB.AddItem(Names[i], TObject(Pointer(Values[i])));
+end;
+
+function CBIntConstValue(const CB: TComboBox): UInt;
+begin
+  Result:= PtrUInt(CB.Items.Objects[CB.ItemIndex]);
+end;
 
 { TfrmSysParameters }
 
@@ -165,11 +178,12 @@ begin
     GetObject(pnFontMessage.Font.Handle, sizeof(NCM.lfMessageFont), @NCM.lfMessageFont);
 
     spi.SetBlob(SPI_SETNONCLIENTMETRICS, ncm.cbSize, @ncm);
+
     // ClearType
     spi.SetBoolParam(SPI_SETFONTSMOOTHING, cbFontSmoothing.Checked);
     spi.SetUInt(SPI_SETFONTSMOOTHINGCONTRAST, seFontSmoothingContrast.Value);
-    spi.SetUInt(SPI_SETFONTSMOOTHINGTYPE, PtrUInt(cbFontSmoothingType.Items.Objects[cbFontSmoothingType.ItemIndex]));
-    spi.SetUInt(SPI_SETFONTSMOOTHINGORIENTATION, PtrUInt(cbFontSmoothingOrientation.Items.Objects[cbFontSmoothingOrientation.ItemIndex]));
+    spi.SetUInt(SPI_SETFONTSMOOTHINGTYPE, CBIntConstValue(cbFontSmoothingType));
+    spi.SetUInt(SPI_SETFONTSMOOTHINGORIENTATION, CBIntConstValue(cbFontSmoothingOrientation));
   finally
     Screen.Cursor:= crDefault;
     FreeAndNil(spi);
@@ -187,12 +201,10 @@ end;
 procedure TfrmSysParameters.AfterConstruction;
 begin
   inherited AfterConstruction;
-  cbFontSmoothingOrientation.Clear;
-  cbFontSmoothingOrientation.AddItem('FE_FONTSMOOTHINGORIENTATIONBGR', TObject(Pointer(FE_FONTSMOOTHINGORIENTATIONBGR)));
-  cbFontSmoothingOrientation.AddItem('FE_FONTSMOOTHINGORIENTATIONRGB', TObject(Pointer(FE_FONTSMOOTHINGORIENTATIONRGB)));
-  cbFontSmoothingType.Clear;
-  cbFontSmoothingType.AddItem('FE_FONTSMOOTHINGCLEARTYPE', TObject(Pointer(FE_FONTSMOOTHINGCLEARTYPE)));
-  cbFontSmoothingType.AddItem('FE_FONTSMOOTHINGSTANDARD', TObject(Pointer(FE_FONTSMOOTHINGSTANDARD)));
+  CBAddIntConsts(cbFontSmoothingOrientation, [FE_FONTSMOOTHINGORIENTATIONBGR, FE_FONTSMOOTHINGORIENTATIONRGB],
+                                             ['FE_FONTSMOOTHINGORIENTATIONBGR', 'FE_FONTSMOOTHINGORIENTATIONRGB'], true);
+  CBAddIntConsts(cbFontSmoothingType, [FE_FONTSMOOTHINGSTANDARD, FE_FONTSMOOTHINGCLEARTYPE],
+                                      ['FE_FONTSMOOTHINGSTANDARD', 'FE_FONTSMOOTHINGCLEARTYPE'], true);
   btnReload.Click;
 end;
 

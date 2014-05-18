@@ -72,6 +72,7 @@ end;
 
 function TSystemParametersInfo.GetUInt(const Action: UINT): UINT;
 begin
+  Result:= UINT(-1);
   SPIChecked(Action, 0, @Result, False);
 end;
 
