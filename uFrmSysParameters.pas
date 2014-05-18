@@ -24,9 +24,12 @@ type
     cbFontSmoothing: TCheckBox;
     cbFontSmoothingOrientation: TComboBox;
     cbFontSmoothingType: TComboBox;
+    cbIconWrapCaption: TCheckBox;
     FontDialog1: TFontDialog;
     Label1: TLabel;
     Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -37,6 +40,7 @@ type
     Label9: TLabel;
     pcSPI: TPageControl;
     pnFontCaption: TPanel;
+    pnFontIcons: TPanel;
     pnFontMenu: TPanel;
     pnFontMessage: TPanel;
     pnFontSmCaption: TPanel;
@@ -47,11 +51,14 @@ type
     seMenuHeight: TSpinEdit;
     seMenuWidth: TSpinEdit;
     seScrollBarHeight: TSpinEdit;
+    seIconSpacingY: TSpinEdit;
     seScrollBarWidth: TSpinEdit;
+    seIconSpacingX: TSpinEdit;
     seSmCaptionHeight: TSpinEdit;
     seSmCaptionWidth: TSpinEdit;
     seFontSmoothingContrast: TSpinEdit;
     stClearType: TTabSheet;
+    tsIcons: TTabSheet;
     tsNonClientArea: TTabSheet;
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveChangesClick(Sender: TObject);
@@ -97,6 +104,7 @@ end;
 procedure TfrmSysParameters.btnReloadClick(Sender: TObject);
 var
   NCM: TNONCLIENTMETRICS;
+  icm: TICONMETRICS;
   spi: TSystemParametersInfo;
 begin
   spi:= TSystemParametersInfo.Create;
@@ -140,6 +148,18 @@ begin
     seFontSmoothingContrast.Value:= spi.GetUInt(SPI_GETFONTSMOOTHINGCONTRAST);
     cbFontSmoothingOrientation.ItemIndex:= cbFontSmoothingOrientation.Items.IndexOfObject(TObject(Pointer(spi.GetUInt(SPI_GETFONTSMOOTHINGORIENTATION))));
     cbFontSmoothingType.ItemIndex:= cbFontSmoothingType.Items.IndexOfObject(TObject(Pointer(spi.GetUInt(SPI_GETFONTSMOOTHINGTYPE))));
+
+    // Icons
+    icm.cbSize:= sizeof(icm);
+    spi.GetBlob(SPI_GETICONMETRICS, icm.cbSize, @icm);
+    cbIconWrapCaption.Checked:= icm.iTitleWrap <> 0;
+    seIconSpacingX.Value:= 0;
+    seIconSpacingX.Value:= icm.iHorzSpacing;
+    seIconSpacingX.MinValue:= GetSystemMetrics(SM_CXICON);
+    seIconSpacingY.Value:= 0;
+    seIconSpacingY.Value:= icm.iVertSpacing;
+    seIconSpacingY.MinValue:= GetSystemMetrics(SM_CYICON);
+    pnFontIcons.Font.Handle:= CreateFontIndirect(icm.lfFont);
   finally
     FreeAndNil(spi);
   end;
@@ -148,6 +168,7 @@ end;
 procedure TfrmSysParameters.btnSaveChangesClick(Sender: TObject);
 var
   NCM: TNONCLIENTMETRICS;
+  icm: TICONMETRICS;
   spi: TSystemParametersInfo;
 begin
   Screen.Cursor:= crHourGlass;
@@ -184,6 +205,15 @@ begin
     spi.SetUInt(SPI_SETFONTSMOOTHINGCONTRAST, seFontSmoothingContrast.Value);
     spi.SetUInt(SPI_SETFONTSMOOTHINGTYPE, CBIntConstValue(cbFontSmoothingType));
     spi.SetUInt(SPI_SETFONTSMOOTHINGORIENTATION, CBIntConstValue(cbFontSmoothingOrientation));
+
+    // Icons
+    icm.cbSize:= sizeof(icm);
+    spi.GetBlob(SPI_GETICONMETRICS, icm.cbSize, @icm);
+    icm.iTitleWrap:= Ord(cbIconWrapCaption.Checked);
+    icm.iHorzSpacing:= seIconSpacingX.Value;
+    icm.iVertSpacing:= seIconSpacingY.Value;
+    GetObject(pnFontIcons.Font.Handle, sizeof(icm.lfFont), @icm.lfFont);
+    spi.SetBlob(SPI_SETICONMETRICS, icm.cbSize, @icm);
   finally
     Screen.Cursor:= crDefault;
     FreeAndNil(spi);

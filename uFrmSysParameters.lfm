@@ -289,6 +289,66 @@ object frmSysParameters: TfrmSysParameters
         ParentColor = False
       end
     end
+    object tsIcons: TTabSheet
+      Caption = 'Icons'
+      ClientHeight = 471
+      ClientWidth = 656
+      object Label11: TLabel
+        Left = 8
+        Height = 20
+        Top = 54
+        Width = 88
+        Caption = 'Icon Spacing:'
+        ParentColor = False
+      end
+      object seIconSpacingX: TSpinEdit
+        Left = 224
+        Height = 28
+        Top = 51
+        Width = 88
+        MaxValue = 1000
+        MinValue = 1
+        TabOrder = 0
+        Value = 1
+      end
+      object seIconSpacingY: TSpinEdit
+        Left = 344
+        Height = 28
+        Top = 51
+        Width = 88
+        MaxValue = 1000
+        MinValue = 1
+        TabOrder = 1
+        Value = 1
+      end
+      object Label12: TLabel
+        Left = 324
+        Height = 20
+        Top = 54
+        Width = 7
+        Caption = 'x'
+        ParentColor = False
+      end
+      object cbIconWrapCaption: TCheckBox
+        Left = 224
+        Height = 24
+        Top = 88
+        Width = 148
+        Caption = 'Wrap Caption Text'
+        TabOrder = 2
+      end
+      object pnFontIcons: TPanel
+        Left = 8
+        Height = 40
+        Top = 120
+        Width = 424
+        Caption = 'Icon Font'
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 3
+        OnClick = FontClick
+      end
+    end
   end
   object FontDialog1: TFontDialog
     MinFontSize = 0
