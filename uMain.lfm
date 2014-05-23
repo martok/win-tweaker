@@ -14,9 +14,9 @@ object Form1: TForm1
     Height = 664
     Top = 0
     Width = 954
-    ActivePage = tsSystemParameters
+    ActivePage = tsShellIcons
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     object tsConsole: TTabSheet
       Caption = 'Console'
@@ -49,6 +49,20 @@ object Form1: TForm1
         Align = alClient
         ClientHeight = 631
         ClientWidth = 946
+        inherited FontDialog1: TFontDialog
+          left = 473
+          top = 259
+        end
+      end
+    end
+    object tsShellIcons: TTabSheet
+      Caption = 'Shell Icons'
+      ClientHeight = 631
+      ClientWidth = 946
+      inline frmShellIcons1: TfrmShellIcons
+        Height = 631
+        Width = 946
+        Align = alClient
       end
     end
   end

@@ -1,0 +1,98 @@
+object frmShellIcons: TfrmShellIcons
+  Left = 0
+  Height = 552
+  Top = 0
+  Width = 699
+  ClientHeight = 552
+  ClientWidth = 699
+  TabOrder = 0
+  DesignLeft = 523
+  DesignTop = 265
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 699
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 699
+    TabOrder = 0
+    object btnReload: TBitBtn
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 208
+      Caption = 'Reload'
+      Kind = bkRetry
+      OnClick = btnReloadClick
+      TabOrder = 0
+    end
+    object btnSaveChanges: TBitBtn
+      Left = 224
+      Height = 30
+      Top = 8
+      Width = 208
+      Caption = 'Save'
+      Kind = bkOK
+      ModalResult = 1
+      OnClick = btnSaveChangesClick
+      TabOrder = 1
+    end
+    object cbViewStyle: TComboBox
+      Left = 448
+      Height = 28
+      Top = 8
+      Width = 160
+      ItemHeight = 20
+      Items.Strings = (
+        'Large Icons'
+        'Small Icons'
+        'Details'
+      )
+      OnSelect = cbViewStyleSelect
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object lvIcons: TListView
+    Left = 0
+    Height = 502
+    Top = 50
+    Width = 699
+    Align = alClient
+    AutoWidthLastColumn = True
+    Columns = <    
+      item
+        Caption = 'Name'
+        Width = 250
+      end    
+      item
+        Caption = 'ID'
+        Width = 30
+      end    
+      item
+        Caption = 'Group'
+        Width = 100
+      end    
+      item
+        Caption = 'Override Filename'
+        Width = 415
+      end>
+    HideSelection = False
+    LargeImages = ilShellIcons
+    ReadOnly = True
+    RowSelect = True
+    SmallImages = ilShellIconsSm
+    TabOrder = 1
+    ViewStyle = vsReport
+    OnDblClick = lvIconsDblClick
+  end
+  object ilShellIcons: TImageList
+    left = 540
+    top = 233
+  end
+  object ilShellIconsSm: TImageList
+    left = 536
+    top = 288
+  end
+end

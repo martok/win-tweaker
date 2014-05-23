@@ -33,7 +33,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="5">
+    <Units Count="7">
       <Unit0>
         <Filename Value="Tweaker.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -68,6 +68,19 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uCSysParametersInfo"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="uFrmShellIcons.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmShellIcons"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="uFrmShellIcons"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="uCStockIconInfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uCStockIconInfo"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

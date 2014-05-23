@@ -26,7 +26,6 @@ type
     cbFontSmoothingType: TComboBox;
     cbIconWrapCaption: TCheckBox;
     cbMouseWheel: TCheckBox;
-    edShortCustom: TEdit;
     FontDialog1: TFontDialog;
     Label1: TLabel;
     Label10: TLabel;
@@ -47,7 +46,6 @@ type
     pnFontMessage: TPanel;
     pnFontSmCaption: TPanel;
     pnFontStatus: TPanel;
-    rgShortOverlay: TRadioGroup;
     seBorderWidth: TSpinEdit;
     seCaptionHeight: TSpinEdit;
     seCaptionWidth: TSpinEdit;
@@ -66,7 +64,6 @@ type
     tsNonClientArea: TTabSheet;
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveChangesClick(Sender: TObject);
-    procedure edShortCustomChange(Sender: TObject);
     procedure FontClick(Sender: TObject);
     procedure rgShortOverlaySelectionChanged(Sender: TObject);
   private
@@ -85,10 +82,6 @@ uses
 
 const
   sCoverWindowSwitch = 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\NoCoverWindow';
-  sShellIconsRegKey = '\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons';
-  sShellIconShortcutRegVal = '29';
-  sShellIconXP = '%systemroot%\System32\shell32.dll,30';
-  sShellIconClear = '%systemroot%\System32\shell32.dll,50';
   sWindowMetricsRegKey = '\Control Panel\Desktop\WindowMetrics';
 
 const
@@ -177,30 +170,6 @@ begin
     seIconSpacingY.MinValue:= GetSystemMetrics(SM_CYICON);
     pnFontIcons.Font.Handle:= CreateFontIndirect(icm.lfFont);
 
-    reg:= TRegistry.Create(KEY_READ);
-    try
-      reg.RootKey:= HKEY_LOCAL_MACHINE;
-      edShortCustom.Text:= '';
-      rgShortOverlay.ItemIndex:= 0;
-      if reg.OpenKey(sShellIconsRegKey, false) then begin
-        if reg.ValueExists(sShellIconShortcutRegVal) then begin
-          s:= reg.ReadString(sShellIconShortcutRegVal);
-          case s of
-            sShellIconXP: rgShortOverlay.ItemIndex:= 1;
-            sShellIconClear: rgShortOverlay.ItemIndex:= 2;
-          else
-            begin
-              rgShortOverlay.ItemIndex:= 3;
-              edShortCustom.Text:= s;
-            end;
-          end;
-        end;
-      end;
-      rgShortOverlaySelectionChanged(Self);
-    finally
-      FreeAndNil(reg);
-    end;
-
     // Mouse
     cbMouseWheel.Checked:= spi.GetUInt(SPI_GETMOUSEWHEELROUTING) in [MOUSEWHEEL_ROUTING_FOCUS, 0];
 
@@ -259,32 +228,11 @@ begin
     icm.iVertSpacing:= seIconSpacingY.Value;
     GetObject(pnFontIcons.Font.Handle, sizeof(icm.lfFont), @icm.lfFont);
     spi.SetBlob(SPI_SETICONMETRICS, icm.cbSize, @icm);
-
-    reg:= TRegistry.Create(KEY_WRITE);
-    try
-      reg.RootKey:= HKEY_LOCAL_MACHINE;
-      if reg.OpenKey(sShellIconsRegKey, false) then begin
-        case rgShortOverlay.ItemIndex of
-          0: reg.DeleteValue(sShellIconShortcutRegVal);
-          1: reg.WriteExpandString(sShellIconShortcutRegVal, sShellIconXP);
-          2: reg.WriteExpandString(sShellIconShortcutRegVal, sShellIconClear);
-          3: reg.WriteExpandString(sShellIconShortcutRegVal, edShortCustom.Text);
-        end;
-      end;
-    finally
-      FreeAndNil(reg);
-    end;
-
   finally
     Screen.Cursor:= crDefault;
     FreeAndNil(spi);
   end;
   btnReload.Click;
-end;
-
-procedure TfrmSysParameters.edShortCustomChange(Sender: TObject);
-begin
-  edShortCustom.Enabled:= rgShortOverlay.ItemIndex = 2;
 end;
 
 procedure TfrmSysParameters.FontClick(Sender: TObject);

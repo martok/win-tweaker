@@ -348,40 +348,6 @@ object frmSysParameters: TfrmSysParameters
         TabOrder = 3
         OnClick = FontClick
       end
-      object rgShortOverlay: TRadioGroup
-        Left = 8
-        Height = 160
-        Top = 184
-        Width = 424
-        AutoFill = True
-        Caption = 'Shortcut Overlay (Run as Administrator to change)'
-        ChildSizing.LeftRightSpacing = 6
-        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-        ChildSizing.EnlargeVertical = crsHomogenousChildResize
-        ChildSizing.ShrinkHorizontal = crsScaleChilds
-        ChildSizing.ShrinkVertical = crsScaleChilds
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 1
-        ClientHeight = 138
-        ClientWidth = 420
-        Items.Strings = (
-          'Default'
-          'XP-Style'
-          'Clear'
-          'Custom'
-        )
-        OnSelectionChanged = rgShortOverlaySelectionChanged
-        TabOrder = 4
-      end
-      object edShortCustom: TEdit
-        Left = 152
-        Height = 28
-        Top = 312
-        Width = 272
-        OnChange = edShortCustomChange
-        TabOrder = 5
-        Text = 'edShortCustom'
-      end
     end
     object tsMouse: TTabSheet
       Caption = 'Mouse'
@@ -401,7 +367,7 @@ object frmSysParameters: TfrmSysParameters
   object FontDialog1: TFontDialog
     MinFontSize = 0
     MaxFontSize = 0
-    left = 473
-    top = 259
+    left = 448
+    top = 8
   end
 end
