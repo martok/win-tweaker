@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Buttons, uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings,
-  Windows;
+  Buttons, StdCtrls, uFrmConsole, uFrmSysParameters, uFrmShellIcons,
+  uFrmFolderSettings, Windows;
 
 type
   TForm1 = class(TForm)
@@ -15,7 +15,10 @@ type
     Frame2_1: TfrmSysParameters;
     frmFolderSettings1: TfrmFolderSettings;
     frmShellIcons1: TfrmShellIcons;
+    Label1: TLabel;
+    lbVersion: TLabel;
     PageControl1: TPageControl;
+    tsAbout: TTabSheet;
     tsFolderSettings: TTabSheet;
     tsShellIcons: TTabSheet;
     tsSystemParameters: TTabSheet;
@@ -34,7 +37,7 @@ var
 implementation
 
 uses
-  uCInitFrame;
+  uCInitFrame, fileinfo;
 
 {$R *.lfm}
 
@@ -79,12 +82,22 @@ var
   i: integer;
   ts: TTabSheet;
   init: IInitializable;
+  vq: TVersionQuad;
 begin
+  if GetProgramVersion(vq) then
+    lbVersion.Caption:= VersionQuadToStr(vq);
   {$IFDEF WIN32}
-  if IsWow64 then
+  lbVersion.Caption:= lbVersion.Caption + sLineBreak + ' 32-bit';
+  if IsWow64 then begin
     MessageDlg('Program is running as a 32bit process on a 64bit system. Some settings will not work, use the 64bit executable!', mtWarning, [mbOK], 0);
-  Caption:= Caption + '  (WOW64)';
+    Caption:= Caption + '  (WOW64)';
+    lbVersion.Caption:= lbVersion.Caption + ' (WOW64)';
+  end;
   {$ENDIF}
+  {$IFDEF WIN64}
+  lbVersion.Caption:= lbVersion.Caption + sLineBreak + ' 64-bit';
+  {$ENDIF}
+
   for i:= 0 to PageControl1.PageCount - 1 do begin
     ts:= PageControl1.Pages[i];
     if (ts.ControlCount>0) and Supports(ts.Controls[0], IInitializable, init) then

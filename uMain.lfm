@@ -14,10 +14,51 @@ object Form1: TForm1
     Height = 664
     Top = 0
     Width = 954
-    ActivePage = tsShellIcons
+    ActivePage = tsAbout
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
+    object tsAbout: TTabSheet
+      Caption = 'About'
+      ClientHeight = 631
+      ClientWidth = 946
+      object Label1: TLabel
+        Left = 0
+        Height = 63
+        Top = 0
+        Width = 946
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Tweaker'
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -27
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold, fsUnderline]
+        Layout = tlCenter
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbVersion: TLabel
+        Left = 0
+        Height = 66
+        Top = 63
+        Width = 946
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Tweaker'
+        Font.CharSet = ANSI_CHARSET
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentColor = False
+        ParentFont = False
+      end
+    end
     object tsConsole: TTabSheet
       Caption = 'Console'
       ClientHeight = 631
@@ -30,6 +71,13 @@ object Form1: TForm1
         ClientWidth = 946
         DesignLeft = 283
         DesignTop = 189
+        inherited Bevel1: TBevel
+          Height = 585
+        end
+        inherited Panel1: TPanel
+          Width = 946
+          ClientWidth = 946
+        end
       end
     end
     object tsSystemParameters: TTabSheet
@@ -49,11 +97,22 @@ object Form1: TForm1
       ClientHeight = 631
       ClientWidth = 946
       inline frmShellIcons1: TfrmShellIcons
+        Left = 0
         Height = 631
+        Top = 0
         Width = 946
         Align = alClient
         ClientHeight = 631
         ClientWidth = 946
+        TabOrder = 0
+        inherited Panel1: TPanel
+          Width = 946
+          ClientWidth = 946
+        end
+        inherited lvIcons: TListView
+          Height = 581
+          Width = 946
+        end
       end
     end
     object tsFolderSettings: TTabSheet
