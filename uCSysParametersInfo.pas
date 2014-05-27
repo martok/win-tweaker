@@ -36,7 +36,7 @@ begin
   else
     f:= 0;
   if not SystemParametersInfo(action, LData, PData, f) then
-    raise ESPIException.CreateFmt('SPI call failed, last error = %d', [GetLastError]);
+    raise ESPIException.CreateFmt('SPI call %.4x (%.8x %s) failed, last error = %d', [action, lData, hexStr(pData), GetLastError]);
 end;
 
 procedure TSystemParametersInfo.GetBlob(const Action: UINT; LData: UINT; PData: Pointer);
