@@ -84,7 +84,7 @@ var
   init: IInitializable;
   vq: TVersionQuad;
 begin
-  if GetProgramVersion(vq) then
+  if GetProgramVersion(vq{%H-}) then
     lbVersion.Caption:= VersionQuadToStr(vq);
   {$IFDEF WIN32}
   lbVersion.Caption:= lbVersion.Caption + sLineBreak + ' 32-bit';
