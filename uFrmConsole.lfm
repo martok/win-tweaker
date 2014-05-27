@@ -5,7 +5,6 @@ object frmConsole: TfrmConsole
   Width = 819
   ClientHeight = 636
   ClientWidth = 819
-  LCLVersion = '1.3'
   TabOrder = 0
   DesignLeft = 987
   DesignTop = 38
@@ -152,7 +151,7 @@ object frmConsole: TfrmConsole
     Height = 28
     Top = 357
     Width = 69
-    MaxValue = 999
+    MaxValue = 65530
     MinValue = 1
     OnChange = seWinSizeChange
     OnClick = seWinSizeChange
@@ -164,7 +163,7 @@ object frmConsole: TfrmConsole
     Height = 28
     Top = 357
     Width = 69
-    MaxValue = 999
+    MaxValue = 65530
     MinValue = 1
     OnChange = seWinSizeChange
     OnClick = seWinSizeChange
@@ -192,7 +191,7 @@ object frmConsole: TfrmConsole
     Height = 28
     Top = 394
     Width = 69
-    MaxValue = 999
+    MaxValue = 65530
     MinValue = 1
     OnChange = seScrBufChange
     TabOrder = 7
@@ -203,7 +202,7 @@ object frmConsole: TfrmConsole
     Height = 28
     Top = 394
     Width = 69
-    MaxValue = 999
+    MaxValue = 65530
     MinValue = 1
     OnChange = seScrBufChange
     TabOrder = 8
@@ -230,7 +229,7 @@ object frmConsole: TfrmConsole
     Height = 28
     Top = 433
     Width = 69
-    MaxValue = 999
+    MaxValue = 65530
     MinValue = 1
     TabOrder = 9
     Value = 1
