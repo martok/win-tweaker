@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   uMain,
-  uFrmConsole, uFrmSysParameters, uFrmShellIcons;
+  uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings;
 
 {$R *.res}
 

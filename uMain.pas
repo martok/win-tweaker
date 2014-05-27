@@ -6,14 +6,17 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Buttons, uFrmConsole, uFrmSysParameters, uFrmShellIcons, Windows;
+  Buttons, uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings,
+  Windows;
 
 type
   TForm1 = class(TForm)
     Frame1_1: TfrmConsole;
     Frame2_1: TfrmSysParameters;
+    frmFolderSettings1: TfrmFolderSettings;
     frmShellIcons1: TfrmShellIcons;
     PageControl1: TPageControl;
+    tsFolderSettings: TTabSheet;
     tsShellIcons: TTabSheet;
     tsSystemParameters: TTabSheet;
     tsConsole: TTabSheet;
@@ -73,6 +76,7 @@ begin
   {$IFDEF WIN32}
   if IsWow64 then
     MessageDlg('Program is running as a 32bit process on a 64bit system. Some settings will not work, use the 64bit executable!', mtWarning, [mbOK], 0);
+  Caption:= Caption + '  (WOW64)';
   {$ENDIF}
 end;
 

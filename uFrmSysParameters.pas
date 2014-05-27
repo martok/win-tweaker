@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, StdCtrls, windows, Dialogs,
-  Buttons, Spin, ExtCtrls, ComCtrls, registry, messages;
+  Buttons, Spin, ExtCtrls, ComCtrls, registry;
 
 type
   { WARNING: DO NOT USE}
@@ -113,8 +113,6 @@ var
   NCM: TNONCLIENTMETRICS;
   icm: TICONMETRICS;
   spi: TSystemParametersInfo;
-  reg: TRegistry;
-  s: string;
 begin
   spi:= TSystemParametersInfo.Create;
   try
@@ -183,7 +181,6 @@ var
   NCM: TNONCLIENTMETRICS;
   icm: TICONMETRICS;
   spi: TSystemParametersInfo;
-  reg: TRegistry;
 begin
   Screen.Cursor:= crHourGlass;
   spi:= TSystemParametersInfo.Create;

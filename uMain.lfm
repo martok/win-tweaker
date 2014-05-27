@@ -30,13 +30,6 @@ object Form1: TForm1
         ClientWidth = 946
         DesignLeft = 283
         DesignTop = 189
-        inherited Bevel1: TBevel
-          Height = 585
-        end
-        inherited Panel1: TPanel
-          Width = 946
-          ClientWidth = 946
-        end
       end
     end
     object tsSystemParameters: TTabSheet
@@ -49,10 +42,6 @@ object Form1: TForm1
         Align = alClient
         ClientHeight = 631
         ClientWidth = 946
-        inherited FontDialog1: TFontDialog
-          left = 473
-          top = 259
-        end
       end
     end
     object tsShellIcons: TTabSheet
@@ -63,6 +52,20 @@ object Form1: TForm1
         Height = 631
         Width = 946
         Align = alClient
+        ClientHeight = 631
+        ClientWidth = 946
+      end
+    end
+    object tsFolderSettings: TTabSheet
+      Caption = 'Folder Settings'
+      ClientHeight = 631
+      ClientWidth = 946
+      inline frmFolderSettings1: TfrmFolderSettings
+        Height = 631
+        Width = 946
+        Align = alClient
+        ClientHeight = 631
+        ClientWidth = 946
       end
     end
   end
