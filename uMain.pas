@@ -33,6 +33,9 @@ var
 
 implementation
 
+uses
+  uCInitFrame;
+
 {$R *.lfm}
 
 function IsWow64: Boolean;
@@ -72,12 +75,22 @@ begin
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
+var
+  i: integer;
+  ts: TTabSheet;
+  init: IInitializable;
 begin
   {$IFDEF WIN32}
   if IsWow64 then
     MessageDlg('Program is running as a 32bit process on a 64bit system. Some settings will not work, use the 64bit executable!', mtWarning, [mbOK], 0);
   Caption:= Caption + '  (WOW64)';
   {$ENDIF}
+  for i:= 0 to PageControl1.PageCount - 1 do begin
+    ts:= PageControl1.Pages[i];
+    if (ts.ControlCount>0) and Supports(ts.Controls[0], IInitializable, init) then
+      init.Initialize;
+  end;
+  PageControl1.ActivePageIndex:= 0;
 end;
 
 

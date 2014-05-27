@@ -1,13 +1,11 @@
 object frmShellIcons: TfrmShellIcons
-  Left = 0
+  Left = 439
   Height = 552
-  Top = 0
+  Top = 213
   Width = 699
   ClientHeight = 552
   ClientWidth = 699
-  TabOrder = 0
-  DesignLeft = 523
-  DesignTop = 265
+  LCLVersion = '1.3'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -60,7 +58,6 @@ object frmShellIcons: TfrmShellIcons
     Top = 50
     Width = 699
     Align = alClient
-    AutoWidthLastColumn = True
     Columns = <    
       item
         Caption = 'Name'
@@ -79,10 +76,8 @@ object frmShellIcons: TfrmShellIcons
         Width = 415
       end>
     HideSelection = False
-    LargeImages = ilShellIcons
     ReadOnly = True
     RowSelect = True
-    SmallImages = ilShellIconsSm
     TabOrder = 1
     ViewStyle = vsReport
     OnDblClick = lvIconsDblClick

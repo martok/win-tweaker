@@ -40,8 +40,8 @@ object frmSysParameters: TfrmSysParameters
     TabOrder = 2
     object tsNonClientArea: TTabSheet
       Caption = 'Non-Client'
-      ClientHeight = 942
-      ClientWidth = 1312
+      ClientHeight = 1884
+      ClientWidth = 2624
       object seBorderWidth: TSpinEdit
         Left = 224
         Height = 28
@@ -235,8 +235,8 @@ object frmSysParameters: TfrmSysParameters
     end
     object stClearType: TTabSheet
       Caption = 'ClearType'
-      ClientHeight = 942
-      ClientWidth = 1312
+      ClientHeight = 1884
+      ClientWidth = 2624
       object cbFontSmoothing: TCheckBox
         Left = 24
         Height = 24
@@ -352,8 +352,8 @@ object frmSysParameters: TfrmSysParameters
     end
     object tsMouse: TTabSheet
       Caption = 'Mouse'
-      ClientHeight = 942
-      ClientWidth = 1312
+      ClientHeight = 1884
+      ClientWidth = 2624
       object cbMouseWheel: TCheckBox
         Left = 24
         Height = 24

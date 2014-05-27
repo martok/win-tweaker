@@ -6,13 +6,10 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, StdCtrls, ExtCtrls,
-  Spin, Dialogs, Buttons, registry;
+  uCInitFrame, Spin, Dialogs, Buttons, registry;
 
 type
-
-  { TfrmConsole }
-
-  TfrmConsole = class(TFrame)
+  TfrmConsole = class(TFrame, IInitializable)
     Bevel1: TBevel;
     btnDeleteWindowKey: TBitBtn;
     btnSaveChanges: TBitBtn;
@@ -73,8 +70,7 @@ type
     procedure EnableControls;
   public
     { public declarations }
-    procedure AfterConstruction; override;
-    procedure BeforeDestruction; override;
+    procedure Initialize;
   end;
 
 implementation
@@ -139,15 +135,9 @@ begin
   end;
 end;
 
-procedure TfrmConsole.AfterConstruction;
+procedure TfrmConsole.Initialize;
 begin
-  inherited AfterConstruction;
   ReadItems;
-end;
-
-procedure TfrmConsole.BeforeDestruction;
-begin
-  inherited BeforeDestruction;
 end;
 
 procedure TfrmConsole.cbWindowNameSelChange(Sender: TObject);

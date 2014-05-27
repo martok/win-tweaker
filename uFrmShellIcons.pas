@@ -6,10 +6,10 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, ExtCtrls, Buttons, ComCtrls, registry,
-  windows, Graphics, StdCtrls, Dialogs;
+  uCInitFrame, windows, Graphics, StdCtrls, Dialogs;
 
 type
-  TfrmShellIcons = class(TFrame)
+  TfrmShellIcons = class(TFrame, IInitializable)
     btnReload: TBitBtn;
     btnSaveChanges: TBitBtn;
     cbViewStyle: TComboBox;
@@ -26,7 +26,7 @@ type
     function AddIcons(small, large: HICON): Integer;
   public
     { public declarations }
-    procedure AfterConstruction; override;
+    procedure Initialize;
   end;
 
 implementation
@@ -276,18 +276,16 @@ begin
 end;
 
 procedure TfrmShellIcons.cbViewStyleSelect(Sender: TObject);
-var
-  w: Integer;
 begin
-  w:= lvIcons.Columns[0].Width;
-  ShowMessageFmt('before %d', [w]);
+  lvIcons.LargeImages:= nil;
+  lvIcons.SmallImages:= nil;
   case cbViewStyle.ItemIndex of
     0: lvIcons.ViewStyle:= vsIcon;
     1: lvIcons.ViewStyle:= vsList;
     2: lvIcons.ViewStyle:= vsReport;
   end;
-  w:= lvIcons.Columns[0].Width;
-  ShowMessageFmt('after %d', [w]);
+  lvIcons.LargeImages:= ilShellIcons;
+  lvIcons.SmallImages:= ilShellIconsSm;
 end;
 
 procedure TfrmShellIcons.lvIconsDblClick(Sender: TObject);
@@ -322,12 +320,11 @@ begin
   end;
 end;
 
-procedure TfrmShellIcons.AfterConstruction;
+procedure TfrmShellIcons.Initialize;
 begin
-  inherited AfterConstruction;
-  cbViewStyle.ItemIndex:= 0;
-//  cbViewStyleSelect(Self);
   btnReload.Click;
+  cbViewStyle.ItemIndex:= 0;
+  cbViewStyleSelect(Self);
 end;
 
 end.

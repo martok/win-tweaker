@@ -33,7 +33,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="Tweaker.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -85,9 +85,15 @@
         <Filename Value="uFrmFolderSettings.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmFolderSettings"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="uFrmFolderSettings"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="uCInitFrame.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uCInitFrame"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

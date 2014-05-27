@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, StdCtrls, windows, Dialogs,
-  Buttons, Spin, ExtCtrls, ComCtrls, registry;
+  uCInitFrame, Buttons, Spin, ExtCtrls, ComCtrls;
 
 type
   { WARNING: DO NOT USE}
@@ -18,7 +18,7 @@ type
     iPaddedBorderWidth : longint;
   end;
 
-  TfrmSysParameters = class(TFrame)
+  TfrmSysParameters = class(TFrame, IInitializable)
     btnSaveChanges: TBitBtn;
     btnReload: TBitBtn;
     cbFontSmoothing: TCheckBox;
@@ -65,12 +65,11 @@ type
     procedure btnReloadClick(Sender: TObject);
     procedure btnSaveChangesClick(Sender: TObject);
     procedure FontClick(Sender: TObject);
-    procedure rgShortOverlaySelectionChanged(Sender: TObject);
   private
     { private declarations }
   public
     { public declarations }
-    procedure AfterConstruction; override;
+    procedure Initialize;
   end;
 
 implementation
@@ -239,14 +238,8 @@ begin
     (Sender as TPanel).Font:= FontDialog1.Font;
 end;
 
-procedure TfrmSysParameters.rgShortOverlaySelectionChanged(Sender: TObject);
+procedure TfrmSysParameters.Initialize;
 begin
-
-end;
-
-procedure TfrmSysParameters.AfterConstruction;
-begin
-  inherited AfterConstruction;
   CBAddIntConsts(cbFontSmoothingOrientation, [FE_FONTSMOOTHINGORIENTATIONBGR, FE_FONTSMOOTHINGORIENTATIONRGB],
                                              ['FE_FONTSMOOTHINGORIENTATIONBGR', 'FE_FONTSMOOTHINGORIENTATIONRGB'], true);
   CBAddIntConsts(cbFontSmoothingType, [FE_FONTSMOOTHINGSTANDARD, FE_FONTSMOOTHINGCLEARTYPE],
