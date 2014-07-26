@@ -10,7 +10,7 @@ uses
   Forms,
   uMain,
   uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings, 
-uCInitFrame;
+uCInitFrame, uFrmAppKeys;
 
 {$R *.res}
 

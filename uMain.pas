@@ -7,17 +7,19 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   Buttons, StdCtrls, uFrmConsole, uFrmSysParameters, uFrmShellIcons,
-  uFrmFolderSettings, Windows;
+  uFrmFolderSettings, uFrmAppKeys, Windows;
 
 type
   TForm1 = class(TForm)
     Frame1_1: TfrmConsole;
     Frame2_1: TfrmSysParameters;
+    frmAppKeys1: TfrmAppKeys;
     frmFolderSettings1: TfrmFolderSettings;
     frmShellIcons1: TfrmShellIcons;
     Label1: TLabel;
     lbVersion: TLabel;
     PageControl1: TPageControl;
+    tsAppKeys: TTabSheet;
     tsAbout: TTabSheet;
     tsFolderSettings: TTabSheet;
     tsShellIcons: TTabSheet;

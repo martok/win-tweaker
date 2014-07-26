@@ -14,9 +14,9 @@ object Form1: TForm1
     Height = 664
     Top = 0
     Width = 954
-    ActivePage = tsAbout
+    ActivePage = tsAppKeys
     Align = alClient
-    TabIndex = 0
+    TabIndex = 5
     TabOrder = 0
     object tsAbout: TTabSheet
       Caption = 'About'
@@ -97,9 +97,7 @@ object Form1: TForm1
       ClientHeight = 631
       ClientWidth = 946
       inline frmShellIcons1: TfrmShellIcons
-        Left = 0
         Height = 631
-        Top = 0
         Width = 946
         Align = alClient
         ClientHeight = 631
@@ -125,6 +123,20 @@ object Form1: TForm1
         Align = alClient
         ClientHeight = 631
         ClientWidth = 946
+      end
+    end
+    object tsAppKeys: TTabSheet
+      Caption = 'App Keys'
+      ClientHeight = 631
+      ClientWidth = 946
+      inline frmAppKeys1: TfrmAppKeys
+        Height = 631
+        Width = 946
+        Align = alClient
+        ClientHeight = 631
+        ClientWidth = 946
+        DesignLeft = 279
+        DesignTop = 297
       end
     end
   end

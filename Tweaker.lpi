@@ -18,7 +18,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="23"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="26"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable ProductVersion=""/>
     </VersionInfo>
@@ -38,11 +39,10 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="9">
+    <Units Count="10">
       <Unit0>
         <Filename Value="Tweaker.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="Tweaker"/>
       </Unit0>
       <Unit1>
         <Filename Value="uMain.pas"/>
@@ -58,7 +58,6 @@
         <ComponentName Value="frmConsole"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="uFrmConsole"/>
       </Unit2>
       <Unit3>
         <Filename Value="uFrmSysParameters.pas"/>
@@ -66,12 +65,10 @@
         <ComponentName Value="frmSysParameters"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="uFrmSysParameters"/>
       </Unit3>
       <Unit4>
         <Filename Value="uCSysParametersInfo.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uCSysParametersInfo"/>
       </Unit4>
       <Unit5>
         <Filename Value="uFrmShellIcons.pas"/>
@@ -79,12 +76,10 @@
         <ComponentName Value="frmShellIcons"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="uFrmShellIcons"/>
       </Unit5>
       <Unit6>
         <Filename Value="uCStockIconInfo.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uCStockIconInfo"/>
       </Unit6>
       <Unit7>
         <Filename Value="uFrmFolderSettings.pas"/>
@@ -92,13 +87,19 @@
         <ComponentName Value="frmFolderSettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="uFrmFolderSettings"/>
       </Unit7>
       <Unit8>
         <Filename Value="uCInitFrame.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uCInitFrame"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="uFrmAppKeys.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmAppKeys"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="uFrmAppKeys"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -122,12 +123,6 @@
         </Win32>
       </Options>
     </Linking>
-    <Other>
-      <CompilerMessages>
-        <MsgFileName Value=""/>
-      </CompilerMessages>
-      <CompilerPath Value="$(CompPath)"/>
-    </Other>
   </CompilerOptions>
   <Debugging>
     <Exceptions Count="3">
