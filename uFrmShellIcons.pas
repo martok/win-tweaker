@@ -219,26 +219,26 @@ begin
   Reg:= TRegistry.Create(KEY_READ);
   try
     Reg.RootKey:= HKEY_LOCAL_MACHINE;
-    if Reg.OpenKeyReadOnly(sShellIconsRegKey) then begin
-      for i:= 0 to high(idIcons) do begin
-        id:= idIcons[i];
-        iid:= IntToStr(Ord(id.ID));
-        it:= lvIcons.Items.Add;
-        it.Data:= @idIcons[i];
-        it.Caption:= id.Descr;
-        it.SubItems.Add(iid);
-        it.SubItems.Add(id.Group);
-        if Reg.ValueExists(iid) then begin
-          icofil:= Reg.ReadString(iid);
-          it.SubItems.Add(icofil);
-        end
-        else begin
-          icofil:= GetActualStockIconPath(id.ID);
-          it.SubItems.Add('');
-        end;
-        if ExtractIcon(icofil, icl, ics) then begin
-          it.ImageIndex:= AddIcons(ics, icl);
-        end;
+    if not Reg.OpenKeyReadOnly(sShellIconsRegKey) then
+      FreeAndNil(Reg);
+    for i:= 0 to high(idIcons) do begin
+      id:= idIcons[i];
+      iid:= IntToStr(Ord(id.ID));
+      it:= lvIcons.Items.Add;
+      it.Data:= @idIcons[i];
+      it.Caption:= id.Descr;
+      it.SubItems.Add(iid);
+      it.SubItems.Add(id.Group);
+      if Assigned(Reg) and Reg.ValueExists(iid) then begin
+        icofil:= Reg.ReadString(iid);
+        it.SubItems.Add(icofil);
+      end
+      else begin
+        icofil:= GetActualStockIconPath(id.ID);
+        it.SubItems.Add('');
+      end;
+      if ExtractIcon(icofil, icl, ics) then begin
+        it.ImageIndex:= AddIcons(ics, icl);
       end;
     end;
   finally
@@ -257,7 +257,7 @@ begin
   Reg:= TRegistry.Create(KEY_WRITE);
   try
     Reg.RootKey:= HKEY_LOCAL_MACHINE;
-    if Reg.OpenKey(sShellIconsRegKey, false) then begin
+    if Reg.OpenKey(sShellIconsRegKey, true) then begin
       for i:= 0 to lvIcons.Items.Count-1 do begin
         it:= lvIcons.Items[i];
         id:= TIconDef(it.Data^);
@@ -268,7 +268,8 @@ begin
         end else
           Reg.DeleteValue(iid);
       end;
-    end;
+    end else
+      MessageDlg('Could not open registry key for writing, did you try to change global settings as non-administrator?', mtError, [mbOK], 0)
   finally
     FreeAndNil(Reg);
   end;
