@@ -29,71 +29,10 @@ var
 implementation
 
 uses
-  fileinfo,
+  fileinfo, uwinImports,
   uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings, uFrmAppKeys;
 
 {$R *.lfm}
-
-function IsWow64: Boolean;
-type
-  TIsWow64Process = function( // Type of IsWow64Process API fn
-    Handle: Windows.THandle; var Res: Windows.BOOL
-  ): Windows.BOOL; stdcall;
-var
-  IsWow64Result: Windows.BOOL;      // Result from IsWow64Process
-  IsWow64Process: TIsWow64Process;  // IsWow64Process fn reference
-begin
-  IsWow64Result:= false;
-  // Try to load required function from kernel32
-  IsWow64Process := TIsWow64Process(Windows.GetProcAddress(
-    Windows.GetModuleHandle('kernel32'), 'IsWow64Process'
-  ));
-  if Assigned(IsWow64Process) then
-  begin
-    // Function is implemented: call it
-    if not IsWow64Process(
-      Windows.GetCurrentProcess, IsWow64Result
-    ) then
-      raise SysUtils.Exception.Create('IsWow64: bad process handle');
-    // Return result of function
-    Result := IsWow64Result;
-  end
-  else
-    // Function not implemented: can't be running on Wow64
-    Result := False;
-end;
-
-(*
-Routine Description: This routine returns TRUE if the caller's
-process is a member of the Administrators local group. Caller is NOT
-expected to be impersonating anyone and is expected to be able to
-open its own process and process token.
-Arguments: None.
-Return Value:
- TRUE - Caller has Administrators local group.
- FALSE - Caller does not have Administrators local group. --
-*)
-
-const
-  SECURITY_NT_AUTHORITY: SID_IDENTIFIER_AUTHORITY = (Value: (0, 0, 0, 0, 0, 5));
-
-function CheckTokenMembership(TokenHandle: HANDLE; SidToCheck: PSID; var IsMember: BOOL): BOOL; stdcall; external advapi32;
-
-function IsUserAdmin: BOOL;
-var
-  NTAuthority: SID_IDENTIFIER_AUTHORITY;
-  AdministratorsGroup: PSID;
-begin
-  Result:= false;
-  NTAuthority:= SECURITY_NT_AUTHORITY;
-  AdministratorsGroup:= nil;
-  Result:= AllocateAndInitializeSid(@NTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0,0,0,0,0,0, AdministratorsGroup);
-  if Result then begin
-    if not CheckTokenMembership(0, AdministratorsGroup, Result) then
-      Result:= false;
-    FreeSid(AdministratorsGroup);
-  end;
-end;
 
 { TForm1 }
 

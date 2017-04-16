@@ -133,10 +133,10 @@ const
 }
 function GetActualStockIconPath(const sid: SHSTOCKICONID): String;
 
-const
-  sShell32DLL = 'shell32.dll';
-
 implementation
+
+uses
+  uwinImports;
 
 function GetActualStockIconPath(const sid: SHSTOCKICONID): String;
 var
@@ -145,7 +145,7 @@ var
 begin
   Result:= '';
   SHGetStockIconInfo := TSHGetStockIconInfo(Windows.GetProcAddress(
-    Windows.GetModuleHandle('shell32'), 'SHGetStockIconInfo'
+    Windows.GetModuleHandle(shell32), 'SHGetStockIconInfo'
   ));
   if Assigned(SHGetStockIconInfo) then begin
     ZeroMemory(@si, sizeof(si));
@@ -153,7 +153,7 @@ begin
     if S_OK = SHGetStockIconInfo(sid, SHGSI_ICONLOCATION, si) then
       Result:= format('%s,%d',[string(si.Path), si.iIcon]);
   end else
-    Result:= format('%s,-%d',[sShell32DLL, ord(sid)+1]);
+    Result:= format('%s,-%d',[shell32, ord(sid)+1]);
 end;
 
 

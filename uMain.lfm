@@ -6,10 +6,11 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 664
   ClientWidth = 954
+  DesignTimePPI = 120
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '1.9.0.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 664
@@ -21,7 +22,7 @@ object Form1: TForm1
     TabOrder = 0
     object tsAbout: TTabSheet
       Caption = 'About'
-      ClientHeight = 636
+      ClientHeight = 631
       ClientWidth = 946
       object Label1: TLabel
         Left = 0

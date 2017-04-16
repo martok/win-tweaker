@@ -32,7 +32,7 @@ type
 implementation
 
 uses
-  uCStockIconInfo;
+  uCStockIconInfo, uwinImports;
 
 type
   TIconDef = record
@@ -143,13 +143,6 @@ const
 {$R *.lfm}
 
 { TfrmShellIcons }
-
-type
-  PHICON = ^HICON;
-
-function ExtractIconEx(lpszFile: LPCSTR; nIconIndex: Integer; phIconLarge, phIconSmall: PHICON; nIcons: UINT):UINT; external 'shell32' name 'ExtractIconExA';
-function ExtractIconExW(lpszFile: LPCWSTR; nIconIndex: Integer; phIconLarge, phIconSmall: PHICON; nIcons: UINT):UINT; external 'shell32' name 'ExtractIconExW';
-function PathUnExpandEnvStrings(lpSrc:LPCSTR; lpDst:LPSTR; nSize:DWORD):BOOL; external 'shlwapi' name 'PathUnExpandEnvStringsA';
 
 function ExpandEnvironment(const aStr: String): String;
 var
