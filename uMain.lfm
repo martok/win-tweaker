@@ -8,19 +8,20 @@ object Form1: TForm1
   ClientWidth = 954
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.3'
+  Position = poScreenCenter
+  LCLVersion = '1.7'
   object PageControl1: TPageControl
     Left = 0
     Height = 664
     Top = 0
     Width = 954
-    ActivePage = tsAppKeys
+    ActivePage = tsAbout
     Align = alClient
-    TabIndex = 5
+    TabIndex = 0
     TabOrder = 0
     object tsAbout: TTabSheet
       Caption = 'About'
-      ClientHeight = 631
+      ClientHeight = 636
       ClientWidth = 946
       object Label1: TLabel
         Left = 0
@@ -43,12 +44,11 @@ object Form1: TForm1
       end
       object lbVersion: TLabel
         Left = 0
-        Height = 66
+        Height = 28
         Top = 63
         Width = 946
         Align = alTop
         Alignment = taCenter
-        AutoSize = False
         Caption = 'Tweaker'
         Font.CharSet = ANSI_CHARSET
         Font.Height = -20
@@ -57,86 +57,6 @@ object Form1: TForm1
         Font.Quality = fqDraft
         ParentColor = False
         ParentFont = False
-      end
-    end
-    object tsConsole: TTabSheet
-      Caption = 'Console'
-      ClientHeight = 631
-      ClientWidth = 946
-      inline Frame1_1: TfrmConsole
-        Height = 631
-        Width = 946
-        Align = alClient
-        ClientHeight = 631
-        ClientWidth = 946
-        DesignLeft = 283
-        DesignTop = 189
-        inherited Bevel1: TBevel
-          Height = 585
-        end
-        inherited Panel1: TPanel
-          Width = 946
-          ClientWidth = 946
-        end
-      end
-    end
-    object tsSystemParameters: TTabSheet
-      Caption = 'SPI'
-      ClientHeight = 631
-      ClientWidth = 946
-      inline Frame2_1: TfrmSysParameters
-        Height = 631
-        Width = 946
-        Align = alClient
-        ClientHeight = 631
-        ClientWidth = 946
-      end
-    end
-    object tsShellIcons: TTabSheet
-      Caption = 'Shell Icons'
-      ClientHeight = 631
-      ClientWidth = 946
-      inline frmShellIcons1: TfrmShellIcons
-        Height = 631
-        Width = 946
-        Align = alClient
-        ClientHeight = 631
-        ClientWidth = 946
-        TabOrder = 0
-        inherited Panel1: TPanel
-          Width = 946
-          ClientWidth = 946
-        end
-        inherited lvIcons: TListView
-          Height = 581
-          Width = 946
-        end
-      end
-    end
-    object tsFolderSettings: TTabSheet
-      Caption = 'Folder Settings'
-      ClientHeight = 631
-      ClientWidth = 946
-      inline frmFolderSettings1: TfrmFolderSettings
-        Height = 631
-        Width = 946
-        Align = alClient
-        ClientHeight = 631
-        ClientWidth = 946
-      end
-    end
-    object tsAppKeys: TTabSheet
-      Caption = 'App Keys'
-      ClientHeight = 631
-      ClientWidth = 946
-      inline frmAppKeys1: TfrmAppKeys
-        Height = 631
-        Width = 946
-        Align = alClient
-        ClientHeight = 631
-        ClientWidth = 946
-        DesignLeft = 279
-        DesignTop = 297
       end
     end
   end

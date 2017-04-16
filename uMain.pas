@@ -6,29 +6,19 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Buttons, StdCtrls, uFrmConsole, uFrmSysParameters, uFrmShellIcons,
-  uFrmFolderSettings, uFrmAppKeys, Windows;
+  Buttons, StdCtrls, uCInitFrame, Windows;
 
 type
   TForm1 = class(TForm)
-    Frame1_1: TfrmConsole;
-    Frame2_1: TfrmSysParameters;
-    frmAppKeys1: TfrmAppKeys;
-    frmFolderSettings1: TfrmFolderSettings;
-    frmShellIcons1: TfrmShellIcons;
     Label1: TLabel;
     lbVersion: TLabel;
     PageControl1: TPageControl;
-    tsAppKeys: TTabSheet;
     tsAbout: TTabSheet;
-    tsFolderSettings: TTabSheet;
-    tsShellIcons: TTabSheet;
-    tsSystemParameters: TTabSheet;
-    tsConsole: TTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { private declarations }
+    procedure AddFeaturePage(const aLabel: String; const aClass: TFrameClass);
   public
     { public declarations }
   end;
@@ -39,7 +29,8 @@ var
 implementation
 
 uses
-  uCInitFrame, fileinfo;
+  fileinfo,
+  uFrmConsole, uFrmSysParameters, uFrmShellIcons, uFrmFolderSettings, uFrmAppKeys;
 
 {$R *.lfm}
 
@@ -72,6 +63,38 @@ begin
     Result := False;
 end;
 
+(*
+Routine Description: This routine returns TRUE if the caller's
+process is a member of the Administrators local group. Caller is NOT
+expected to be impersonating anyone and is expected to be able to
+open its own process and process token.
+Arguments: None.
+Return Value:
+ TRUE - Caller has Administrators local group.
+ FALSE - Caller does not have Administrators local group. --
+*)
+
+const
+  SECURITY_NT_AUTHORITY: SID_IDENTIFIER_AUTHORITY = (Value: (0, 0, 0, 0, 0, 5));
+
+function CheckTokenMembership(TokenHandle: HANDLE; SidToCheck: PSID; var IsMember: BOOL): BOOL; stdcall; external advapi32;
+
+function IsUserAdmin: BOOL;
+var
+  NTAuthority: SID_IDENTIFIER_AUTHORITY;
+  AdministratorsGroup: PSID;
+begin
+  Result:= false;
+  NTAuthority:= SECURITY_NT_AUTHORITY;
+  AdministratorsGroup:= nil;
+  Result:= AllocateAndInitializeSid(@NTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0,0,0,0,0,0, AdministratorsGroup);
+  if Result then begin
+    if not CheckTokenMembership(0, AdministratorsGroup, Result) then
+      Result:= false;
+    FreeSid(AdministratorsGroup);
+  end;
+end;
+
 { TForm1 }
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -83,7 +106,6 @@ procedure TForm1.FormShow(Sender: TObject);
 var
   i: integer;
   ts: TTabSheet;
-  init: IInitializable;
   vq: TVersionQuad;
 begin
   if GetProgramVersion(vq{%H-}) then
@@ -99,13 +121,31 @@ begin
   {$IFDEF WIN64}
   lbVersion.Caption:= lbVersion.Caption + sLineBreak + ' 64-bit';
   {$ENDIF}
+  if IsUserAdmin then lbVersion.Caption:= lbVersion.Caption + sLineBreak + 'Admin';
 
-  for i:= 0 to PageControl1.PageCount - 1 do begin
-    ts:= PageControl1.Pages[i];
-    if (ts.ControlCount>0) and Supports(ts.Controls[0], IInitializable, init) then
-      init.Initialize;
-  end;
+  AddFeaturePage('Console', TfrmConsole);
+  AddFeaturePage('SPI', TfrmSysParameters);
+  AddFeaturePage('Shell Icons', TfrmShellIcons);
+  AddFeaturePage('Folder Settings', TfrmFolderSettings);
+  AddFeaturePage('App Keys', TfrmAppKeys);
+
   PageControl1.ActivePageIndex:= 0;
+end;
+
+procedure TForm1.AddFeaturePage(const aLabel: String; const aClass: TFrameClass);
+var
+  pg: TTabSheet;
+  inst: TFrame;
+  init: IInitializable;
+begin
+  pg:= TTabSheet.Create(PageControl1);
+  pg.Caption:= aLabel;
+  pg.PageControl:= PageControl1;
+  inst:= aClass.Create(pg);
+  inst.Align:= alClient;
+  inst.Parent:= pg;
+  if Supports(inst, IInitializable, init) then
+    init.Initialize;
 end;
 
 
